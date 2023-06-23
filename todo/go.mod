@@ -41,5 +41,4 @@ require (
 	github.com/go-logfmt/logfmt v0.5.1 // indirect
 	github.com/gorilla/handlers v1.5.1
 	github.com/gorilla/mux v1.8.0
-	github.com/kujtimiihoxha/demomicro_api v0.0.0-20171014175517-c3eba470c2d7
 )

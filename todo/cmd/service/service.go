@@ -15,7 +15,8 @@ import (
 	endpoint "github.com/pmtabe1/demomicro_api/todo/pkg/endpoint"
 	http "github.com/pmtabe1/demomicro_api/todo/pkg/http"
 	service "github.com/pmtabe1/demomicro_api/todo/pkg/service"
-	lightsteptracergo "github.com/lightstep/lightstep-tracer-go"
+
+ 	lightsteptracergo "github.com/lightstep/lightstep-tracer-go"
 	group "github.com/oklog/oklog/pkg/group"
 	opentracinggo "github.com/opentracing/opentracing-go"
 	zipkingoopentracing "github.com/openzipkin-contrib/zipkin-go-opentracing"
