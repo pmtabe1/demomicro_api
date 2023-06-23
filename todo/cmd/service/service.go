@@ -16,11 +16,11 @@ import (
 	http "github.com/pmtabe1/demomicro_api/todo/pkg/http"
 	service "github.com/pmtabe1/demomicro_api/todo/pkg/service"
 
- 	lightsteptracergo "github.com/lightstep/lightstep-tracer-go"
+	lightsteptracergo "github.com/lightstep/lightstep-tracer-go"
 	group "github.com/oklog/oklog/pkg/group"
 	opentracinggo "github.com/opentracing/opentracing-go"
-	zipkingoopentracing "github.com/openzipkin-contrib/zipkin-go-opentracing"
-	prometheus1 "github.com/prometheus/client_golang/prometheus"
+	// zipkingoopentracing "github.com/openzipkin-contrib/zipkin-go-opentracing"
+	prometheusClient "github.com/prometheus/client_golang/prometheus"
 	promhttp "github.com/prometheus/client_golang/prometheus/promhttp"
 	appdash "sourcegraph.com/sourcegraph/appdash"
 	opentracing "sourcegraph.com/sourcegraph/appdash/opentracing"
@@ -55,18 +55,19 @@ func Run() {
 	// components that use it, as a dependency
 	if *zipkinURL != "" {
 		logger.Log("tracer", "Zipkin", "URL", *zipkinURL)
-		collector, err := zipkingoopentracing.NewHTTPCollector(*zipkinURL)
-		if err != nil {
-			logger.Log("err", err)
-			os.Exit(1)
-		}
-		defer collector.Close()
-		recorder := zipkingoopentracing.NewRecorder(collector, false, "localhost:80", "todo")
-		tracer, err = zipkingoopentracing.NewTracer(recorder)
-		if err != nil {
-			logger.Log("err", err)
-			os.Exit(1)
-		}
+		// collector, err := zipkingoopentracing.NewHTTPCollector(*zipkinURL)
+		// if err != nil {
+		// 	logger.Log("err", err)
+		// 	fmt.Println("jahjahsajshajhsa ==", err)
+		// 	os.Exit(1)
+		// }
+		// defer collector.Close()
+		// recorder := zipkingoopentracing.NewRecorder(collector, false, "localhost:80", "todo")
+		// tracer, err = zipkingoopentracing.NewTracer(recorder)
+		// if err != nil {
+		// 	logger.Log("err", err)
+		// 	os.Exit(1)
+		// }
 	} else if *lightstepToken != "" {
 		logger.Log("tracer", "LightStep")
 		tracer = lightsteptracergo.NewTracer(lightsteptracergo.Options{AccessToken: *lightstepToken})
@@ -115,7 +116,7 @@ func getServiceMiddleware(logger log.Logger) (mw []service.Middleware) {
 }
 func getEndpointMiddleware(logger log.Logger) (mw map[string][]endpoint1.Middleware) {
 	mw = map[string][]endpoint1.Middleware{}
-	duration := prometheus.NewSummaryFrom(prometheus1.SummaryOpts{
+	duration := prometheus.NewSummaryFrom(prometheusClient.SummaryOpts{
 		Help:      "Request duration in seconds.",
 		Name:      "request_duration_seconds",
 		Namespace: "example",
