@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - .:/go/src/github.com/pmtabe1/go.microservices.api/demomicro_api/todo
+      - .:/demomicro_api/todo
     container_name: todoapi
     ports:
       - 8801:8081

@@ -1,6 +1,5 @@
-# FROM golang
-FROM golang:1.19
-
+FROM golang
+ 
 # Define the GITHUB_TOKEN argument and set it as an environment variable
 ARG GITHUB_TOKEN
 ENV GITHUB_TOKEN=$GITHUB_TOKEN
@@ -9,8 +8,7 @@ ENV GITHUB_TOKEN=$GITHUB_TOKEN
 ENV GO111MODULE=on
 
 # Set the APP_DIR variable to the desired directory path
-# ARG APP_DIR=/go/src/github.com/pmtabe1/go.microservices.api/demomicro_api/todo
-# ARG APP_DIR=/go/src/app
+ 
 ENV APP_DIR="/go/src/app"
 
 
@@ -56,12 +54,9 @@ ENV GOARCH=amd64
 ENV GOOS=linux
 
 # Build the Go application with CGO disabled and for Linux
-# RUN CGO_ENABLED=0 GOOS=linux go build -mod vendor -o server ${APP_DIR}/cmd/main.go
-# RUN CGO_ENABLED=0 GOOS=linux go build -mod vendor -o server  ./cmd/main.go
-# RUN CGO_ENABLED=0 GOOS=linux go build  -v -o server  /go/src/github.com/pmtabe1/go.microservices.api/demomicro_api/todo/cmd/main.go
+ 
 
-# COPY ./cmd/main.go /go/src/github.com/pmtabe1/go.microservices.api/demomicro_api/todo/cmd/main.go
-
+ 
 # Check if main.go file exists
 RUN if [ -f "cmd/main.go" ]; then \
     go build -o app -v ./cmd/main.go && \

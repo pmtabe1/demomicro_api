@@ -1,6 +1,6 @@
 module github.com/pmtabe1/demomicro_api/todo
 
-go 1.19
+go 1.20
 
 require (
 	github.com/go-kit/kit v0.12.0
