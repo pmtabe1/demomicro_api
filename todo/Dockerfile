@@ -66,7 +66,5 @@ RUN if [ -f "cmd/main.go" ]; then \
     exit 1; \
     fi
 
-# RUN  go build -o server -v  /go/src/github.com/pmtabe1/go.microservices.api/demomicro_api/todo/cmd/main.go
-
 # Set the entrypoint command to run the built executable
 CMD ["app" ]
